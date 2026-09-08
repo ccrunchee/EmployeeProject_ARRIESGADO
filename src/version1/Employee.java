@@ -1,6 +1,6 @@
 package version1;
 
-public class HourlyEmployee {
+public class Employee {
 
     private int empID;
     private String empName;
