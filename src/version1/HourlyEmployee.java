@@ -1,6 +1,6 @@
 package version1;
 
-public class Employee {
+public class HourlyEmployee {
 
     private int empID;
     private String empName;
@@ -59,6 +59,30 @@ public class Employee {
 
     public void setRatePerHour(double ratePerHour) {
         this.ratePerHour = ratePerHour;
+    }
+
+    public double computeSalary() {
+
+        if (totalHoursWorked <= 40) {
+            return totalHoursWorked * ratePerHour;
+        } else {
+            double regularPay = 40 * ratePerHour;
+            double overtimePay = (totalHoursWorked - 40) * (ratePerHour * 1.5);
+
+            return overtimePay + overtimePay;
+        }
+    }
+
+    public void displayHourlyEmployee() {
+        System.out.printf("ID: %d | Name: %s | Hours: %.2f | Rate: ₱%.2f/hr%n", empID, empName, totalHoursWorked, ratePerHour);
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "HourlyEmployee [ID: %d, Name: %s, Hours: %.2f, Rate: ₱%.2f, Total Salary: ₱%,.2f]",
+                empID, empName, totalHoursWorked, ratePerHour, computeSalary()
+        );
     }
 
 }
