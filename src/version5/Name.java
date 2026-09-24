@@ -1,6 +1,4 @@
-package version4;
-
-import java.util.Objects;
+package version5;
 
 public class Name implements Cloneable {
 
@@ -9,8 +7,8 @@ public class Name implements Cloneable {
     private String middleName;
 
     public Name() {
-        this.firstName = "";
-        this.lastName = "";
+        this.firstName = "N/A";
+        this.lastName = "N/A";
         this.middleName = "";
     }
 
@@ -65,18 +63,14 @@ public class Name implements Cloneable {
 
         Name other = (Name) obj;
 
-        return firstName.equalsIgnoreCase(other.firstName)
-                && lastName.equalsIgnoreCase(other.lastName)
-                && middleName.equalsIgnoreCase(other.middleName);
+        return firstName.equals(other.firstName)
+                && lastName.equals(other.lastName)
+                && middleName.equals(other.middleName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(
-                firstName.toLowerCase(),
-                lastName.toLowerCase(),
-                middleName.toLowerCase()
-        );
+        return firstName.hashCode() + lastName.hashCode() + middleName.hashCode();
     }
 
     @Override

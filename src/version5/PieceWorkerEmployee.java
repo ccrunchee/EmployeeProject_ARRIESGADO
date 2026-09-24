@@ -1,4 +1,4 @@
-package version4;
+package version5;
 
 public class PieceWorkerEmployee extends Employee {
 
@@ -11,14 +11,9 @@ public class PieceWorkerEmployee extends Employee {
         this.ratePerPiece = 0;
     }
 
-    public PieceWorkerEmployee(
-            int empID,
-            Name empName,
-            MyDate birthDate,
-            MyDate dateHired,
-            int totalPiecesFinished,
-            double ratePerPiece
-    ) {
+    public PieceWorkerEmployee(int empID, Name empName, MyDate birthDate,
+                               MyDate dateHired, int totalPiecesFinished,
+                               double ratePerPiece) {
         super(empID, empName, birthDate, dateHired);
         this.totalPiecesFinished = totalPiecesFinished;
         this.ratePerPiece = ratePerPiece;
@@ -40,14 +35,9 @@ public class PieceWorkerEmployee extends Employee {
         this.ratePerPiece = ratePerPiece;
     }
 
+    @Override
     public double computeSalary(int currentMonth) {
-
-        int completeHundreds = totalPiecesFinished / 100;
-        int remainingPieces = totalPiecesFinished % 100;
-
-        double salary =
-                (completeHundreds * 10 * ratePerPiece)
-                        + (remainingPieces * ratePerPiece);
+        double salary = totalPiecesFinished * ratePerPiece;
 
         if (getBirthDate().getMonth() == currentMonth) {
             salary += 5000;
@@ -56,13 +46,12 @@ public class PieceWorkerEmployee extends Employee {
         return salary;
     }
 
-    public void displayPieceWorkerEmployee() {
-        System.out.printf(
-                "ID: %d | Name: %s | Pieces: %d | Rate: ₱%.2f/piece%n",
-                getEmpID(),
-                getEmpName(),
-                totalPiecesFinished,
-                ratePerPiece
-        );
+    @Override
+    public String toString() {
+        return "PieceWorkerEmployee [ID: " + getEmpID()
+                + ", Name: " + getEmpName()
+                + ", Total Salary: ₱"
+                + String.format("%,.2f", computeSalary())
+                + "]";
     }
 }

@@ -1,11 +1,5 @@
 package version4;
 
-import version3.CommissionEmployee;
-import version3.MyDate;
-import version3.Name;
-
-import java.util.Objects;
-
 public class BasePlusCommissionEmployee
         extends CommissionEmployee {
 
@@ -16,11 +10,14 @@ public class BasePlusCommissionEmployee
         this.baseSalary = 0;
     }
 
-    public BasePlusCommissionEmployee(int empID, Name empName,
-                                      MyDate birthDate,
-                                      MyDate dateHired,
-                                      double totalSale,
-                                      double baseSalary) {
+    public BasePlusCommissionEmployee(
+            int empID,
+            Name empName,
+            MyDate birthDate,
+            MyDate dateHired,
+            double totalSale,
+            double baseSalary
+    ) {
         super(
                 empID,
                 empName,
@@ -29,7 +26,7 @@ public class BasePlusCommissionEmployee
                 totalSale
         );
 
-        setBaseSalary(baseSalary);
+        this.baseSalary = baseSalary;
     }
 
     public double getBaseSalary() {
@@ -37,14 +34,7 @@ public class BasePlusCommissionEmployee
     }
 
     public void setBaseSalary(double baseSalary) {
-        if (baseSalary >= 0) {
-            this.baseSalary = baseSalary;
-        }
-    }
-
-    @Override
-    public double computeSalary() {
-        return computeSalary(-1);
+        this.baseSalary = baseSalary;
     }
 
     @Override
@@ -55,55 +45,11 @@ public class BasePlusCommissionEmployee
 
     public void displayBasePlusCommissionEmployee() {
         System.out.printf(
-                "ID: %d | Name: %s | DOB: %s | Hired: %s | Total Sale: ₱%,.2f | Base Salary: ₱%,.2f%n",
+                "ID: %d | Name: %s | Base Salary: ₱%.2f | Total Sale: ₱%.2f%n",
                 getEmpID(),
                 getEmpName(),
-                getBirthDate(),
-                getDateHired(),
-                getTotalSale(),
-                baseSalary
-        );
-    }
-
-    @Override
-    public String toString() {
-        return String.format(
-                "BasePlusCommissionEmployee [ID: %d, Name: %s, DOB: %s, Hired: %s, Total Sale: ₱%,.2f, Base Salary: ₱%,.2f, Total Salary: ₱%,.2f]",
-                getEmpID(),
-                getEmpName(),
-                getBirthDate(),
-                getDateHired(),
-                getTotalSale(),
                 baseSalary,
-                computeSalary()
+                getTotalSale()
         );
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (!super.equals(obj)) {
-            return false;
-        }
-
-        BasePlusCommissionEmployee other =
-                (BasePlusCommissionEmployee) obj;
-
-        return Double.compare(
-                baseSalary,
-                other.baseSalary
-        ) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(
-                super.hashCode(),
-                baseSalary
-        );
-    }
-
-    @Override
-    public BasePlusCommissionEmployee clone() {
-        return (BasePlusCommissionEmployee) super.clone();
     }
 }

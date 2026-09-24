@@ -1,4 +1,4 @@
-package version4;
+package version5;
 
 public class HourlyEmployee extends Employee {
 
@@ -11,14 +11,9 @@ public class HourlyEmployee extends Employee {
         this.ratePerHour = 0;
     }
 
-    public HourlyEmployee(
-            int empID,
-            Name empName,
-            MyDate birthDate,
-            MyDate dateHired,
-            float totalHoursWorked,
-            double ratePerHour
-    ) {
+    public HourlyEmployee(int empID, Name empName, MyDate birthDate,
+                          MyDate dateHired, float totalHoursWorked,
+                          double ratePerHour) {
         super(empID, empName, birthDate, dateHired);
         this.totalHoursWorked = totalHoursWorked;
         this.ratePerHour = ratePerHour;
@@ -40,18 +35,16 @@ public class HourlyEmployee extends Employee {
         this.ratePerHour = ratePerHour;
     }
 
+    @Override
     public double computeSalary(int currentMonth) {
-
         double salary;
 
         if (totalHoursWorked <= 40) {
             salary = totalHoursWorked * ratePerHour;
         } else {
-            double regularPay = 40 * ratePerHour;
             double overtimeHours = totalHoursWorked - 40;
-            double overtimePay = overtimeHours * ratePerHour * 1.5;
-
-            salary = regularPay + overtimePay;
+            salary = (40 * ratePerHour)
+                    + (overtimeHours * ratePerHour * 1.5);
         }
 
         if (getBirthDate().getMonth() == currentMonth) {
@@ -61,13 +54,12 @@ public class HourlyEmployee extends Employee {
         return salary;
     }
 
-    public void displayHourlyEmployee() {
-        System.out.printf(
-                "ID: %d | Name: %s | Hours: %.2f | Rate: ₱%.2f/hr%n",
-                getEmpID(),
-                getEmpName(),
-                totalHoursWorked,
-                ratePerHour
-        );
+    @Override
+    public String toString() {
+        return "HourlyEmployee [ID: " + getEmpID()
+                + ", Name: " + getEmpName()
+                + ", Total Salary: ₱"
+                + String.format("%,.2f", computeSalary())
+                + "]";
     }
 }

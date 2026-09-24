@@ -1,4 +1,4 @@
-package version4;
+package version5;
 
 public class MyDate implements Cloneable {
 
@@ -12,24 +12,10 @@ public class MyDate implements Cloneable {
         this.year = 2000;
     }
 
-    public MyDate(int month, int day, int year) {
-        setDate(month, day, year);
-    }
-
-    public void setDate(int month, int day, int year) {
-        if (month >= 1 && month <= 12) {
-            this.month = month;
-        } else {
-            this.month = 1;
-        }
-
-        if (day >= 1 && day <= 31) {
-            this.day = day;
-        } else {
-            this.day = 1;
-        }
-
-        this.year = year;
+    public MyDate(int day, int month, int year) {
+        setDay(day);
+        setMonth(month);
+        setYear(year);
     }
 
     public int getDay() {
@@ -37,7 +23,11 @@ public class MyDate implements Cloneable {
     }
 
     public void setDay(int day) {
-        this.day = day;
+        if (day >= 1 && day <= 31) {
+            this.day = day;
+        } else {
+            this.day = 1;
+        }
     }
 
     public int getMonth() {
@@ -45,7 +35,11 @@ public class MyDate implements Cloneable {
     }
 
     public void setMonth(int month) {
-        this.month = month;
+        if (month >= 1 && month <= 12) {
+            this.month = month;
+        } else {
+            this.month = 1;
+        }
     }
 
     public int getYear() {
@@ -58,22 +52,16 @@ public class MyDate implements Cloneable {
 
     @Override
     public String toString() {
-        return String.format("%02d/%02d/%04d", month, day, year);
+        return String.format("%02d %s %d", day, getMonthName(), year);
     }
 
-    public String toDisplayString() {
+    private String getMonthName() {
         String[] months = {
-                "Jan", "Feb", "Mar", "Apr",
-                "May", "Jun", "Jul", "Aug",
-                "Sep", "Oct", "Nov", "Dec"
+                "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
         };
 
-        return String.format(
-                "%02d %s %04d",
-                day,
-                months[month - 1],
-                year
-        );
+        return months[month - 1];
     }
 
     @Override
